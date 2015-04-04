@@ -11,6 +11,7 @@
 --
 --   [1, 2, 3, 4, 5, 6, 7, 8]
 --
+--
 -- usage in Idris REPL: *Flatten> show lst1
 --                      *Flatten> show (flatten lst1)
 --
@@ -52,7 +53,7 @@ bug_1 = aCons {m = Nothing} (aCons {m = Nothing} 1 aNil) aNil
 -- not be total. Do not try to print the following value in the REPL.
 
 bug_2 : AnyList
-bug_2 = aCons {m = Just refl} bug_2 aNil
+bug_2 = aCons {m = Just Refl} bug_2 aNil
 
 -- some syntax
 
@@ -62,7 +63,7 @@ class Element t where
   (#) : t -> AnyList -> AnyList
 
 instance Element AnyList where
-  (#) x xs = aCons {m = Just refl} x xs
+  (#) x xs = aCons {m = Just Refl} x xs
 
 instance Element Integer where
   (#) x xs = aCons {m = Nothing} x xs

@@ -14,6 +14,8 @@
 --
 
 module Rot13
+import Data.So
+import Data.Fin
 %default total
 
 data Case : Type where
@@ -57,12 +59,12 @@ instance Eq Item where
   (==) (Nonalphabetic c) (Nonalphabetic c') = (c == c')
   (==) _ _ = False
 
-test_1 : so (cast {to = Item} 'a' == Alphabetic Lower 0
+test_1 : So (cast {to = Item} 'a' == Alphabetic Lower 0
           && cast {to = Item} 'z' == Alphabetic Lower 25
           && cast {to = Item} 'A' == Alphabetic Upper 0
           && cast {to = Item} 'Z' == Alphabetic Upper 25
           && cast {to = Item} '*' == Nonalphabetic '*')
-test_1 = oh
+test_1 = Oh
 
 --
 -- decMod x : Fin (S n) ... (x - 1) mod N,
@@ -72,8 +74,8 @@ test_1 = oh
 --
 
 decMod : {n:Nat} -> Fin (S n) -> Fin (S n)
-decMod fZ = last
-decMod (fS x) = weaken x
+decMod FZ = last
+decMod (FS x) = weaken x
 
 subMod : {n:Nat} -> Nat -> Fin (S n) -> Fin (S n)
 subMod Z x = x
@@ -95,6 +97,6 @@ stringRot13 = pack . map charRot13 . unpack
 
 -- unit tests
 
-test_2 : so (stringRot13 "abc" == "nop"
+test_2 : So (stringRot13 "abc" == "nop"
           && stringRot13 "nop" == "abc")
-test_2 = oh
+test_2 = Oh

@@ -12,6 +12,8 @@
 -- show some arithmetic with these values and variables. If your language
 -- can directly enter these extreme floating point values then show it.
 
+import Data.So
+
 -- There is no input syntax for floating point infinities in Idris 0.9.11.2
 
 PositiveInfinity : Float
@@ -24,24 +26,24 @@ NegativeZero = 1.0 / NegativeInfinity
 
 -- The output syntax is already there.
 
-test_0 : so (show PositiveInfinity == "Infinity"
+test_0 : So (show PositiveInfinity == "Infinity"
           && show NegativeInfinity == "-Infinity"
           && show NegativeZero == "-0.0")
-test_0 = oh
+test_0 = Oh
 
-test_1 : so (NegativeInfinity < PositiveInfinity
+test_1 : So (NegativeInfinity < PositiveInfinity
           && NegativeInfinity < NegativeZero
           && 0.0 < PositiveInfinity
           && PositiveInfinity + PositiveInfinity == PositiveInfinity
           && NegativeInfinity + 1.0e300 == NegativeInfinity)
-test_1 = oh
+test_1 = Oh
 
 -- According to IEEE754, comparison ignores the sign of zero.
 
-test_2 : so (NegativeZero == 0.0
+test_2 : So (NegativeZero == 0.0
           && not (NegativeZero < 0.0)
           && not (NegativeZero > 0.0))
-test_2 = oh
+test_2 = Oh
 
 -- Define a NaN.
 
@@ -50,12 +52,12 @@ NaN = PositiveInfinity - PositiveInfinity
 
 -- Test.
 
-test_3 : so (not (NaN == NaN)  -- IEEE754
+test_3 : So (not (NaN == NaN)  -- IEEE754
           && NaN /= NaN)       -- Idris "x /= y" means "not (x == y)"
-test_3 = oh
+test_3 = Oh
 
-test_4 : so (show NaN == "NaN")
-test_4 = oh
+test_4 : So (show NaN == "NaN")
+test_4 = Oh
 
 -- Compute the largest finite Float (DBL_MAX in C).
 

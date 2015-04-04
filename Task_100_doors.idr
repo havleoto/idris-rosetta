@@ -25,6 +25,8 @@
 -- a Fortran program would probably use unchecked array indexing.
 --
 
+import Data.Vect
+
 size : Nat
 size = 100 -- Change to 10 if you want to use the REPL!
 
